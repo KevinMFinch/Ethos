@@ -1,4 +1,3 @@
-
 var MongoClient = require('mongodb').MongoClient;
 
 var express = require('express');
@@ -12,7 +11,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
 
   router.get('/', function(req, res, next) {
     collection.find({}).toArray(function(err, docs) {
-      res.send(JSON.stringify(docs));
+      res.json(JSON.stringify(docs));
     })
   });
 

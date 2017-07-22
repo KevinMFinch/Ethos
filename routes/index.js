@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('Hit Homepage');
+  res.render('index', { title: 'Express' });
 });
 
 module.exports = router;
