@@ -12,7 +12,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
   // Return all lists
   router.get('/', function(req, res, next) {
     collection.find({}).toArray(function(err, docs) {
-      res.json(JSON.parse(JSON.stringify(docs)));
+      res.render('lists', JSON.parse(JSON.stringify(docs)));
     })
   });
 
@@ -20,7 +20,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
   router.get('/:listID', function(req, res, next) {
     var listID = parseInt(req.params.listID);
     collection.find({"listID":listID}).toArray(function(err, docs) {
-      res.json(JSON.parse(JSON.stringify(docs)))
+      res.json(JSON.parse(JSON.stringify(docs)));
     })
   })
 
@@ -30,6 +30,12 @@ MongoClient.connect(mongoUrl, function(err, db) {
     collection.find({"owner": userName}).toArray(function(err, docs) {
       res.json(JSON.parse(JSON.stringify(docs)));
     })
+  });
+
+  // Submit list post
+  router.post('/send', function(request, response){    
+    console.log(request.body.newID); 
+    response.render('index', {title: request.body.newID});
   });
 
 })
