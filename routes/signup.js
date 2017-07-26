@@ -28,19 +28,18 @@ MongoClient.connect(mongoUrl, function(err, db) {
     }
 
     db.collection("lists").insertMany(insertDocs, function(err, response) {
-      for(var objID in response.insertedIds) {
-        listIDs.push(objID.toString());
-      }
+      listIDs = response.insertedIds;
+      console.log(listIDs);
+      db.collection("users").insertOne({
+        "username" : req.body.username,
+        "email" : req.body.email,
+        "password" : req.body.password,
+        "listIDs" : listIDs
+      }, function(err, r) {
+        res.send("Success!");
+      });
     });
-    console.log(req.body.username);
-    db.collection("users").insertOne({
-      "username" : req.body.username,
-      "email" : req.body.email,
-      "password" : req.body.password,
-      "listIDs" : listIDs
-    }, function(err, r) {
-      res.json(r);
-    });
+    
   });
 
 })
