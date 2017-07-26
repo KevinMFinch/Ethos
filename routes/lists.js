@@ -16,6 +16,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
     })
   });
 
+
   // Returns the list with the particular listID
   router.get('/:listID', function(req, res, next) {
     var listID = parseInt(req.params.listID);
@@ -33,9 +34,9 @@ MongoClient.connect(mongoUrl, function(err, db) {
   });
 
   // Submit list post
-  router.post('/send', function(request, response){    
+  router.post('/', function(request, response){    
     console.log(request.body.newID); 
-    response.render('index', {title: request.body.newID});
+    response.render('lists', {title: request.body.newID});
   });
 
 })
