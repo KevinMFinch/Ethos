@@ -29,7 +29,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
   router.get('/owner/:userName', function(req, res, next) {
     var userName = req.params.userName;
     collection.find({"owner": userName}).toArray(function(err, docs) {
-      res.json(JSON.parse(JSON.stringify(docs)));
+      res.render('listview', {docs: docs});
     })
   });
 

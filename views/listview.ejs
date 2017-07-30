@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lists</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <ul>
+    <% docs.forEach(function(doc){ %>
+        <li><%= doc.category %></li>
+    <% }); %>
+    </ul>
+  </body>
+</html>
