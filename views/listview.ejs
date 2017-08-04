@@ -8,6 +8,24 @@
     <ul>
     <% docs.forEach(function(doc){ %>
         <li><%= doc.category %></li>
+        <p>Completed</p>
+        <ul> 
+        <% doc.completed.forEach(function(item){ %>
+            <li><%= item %></li>
+        <% }); %>
+        </ul>
+        <p>Planned</p>
+        <ul> 
+        <% doc.planned.forEach(function(item){ %>
+            <li><%= item %></li>
+        <% }); %>
+        </ul>
+        <p>Current</p>
+        <ul> 
+        <% doc.current.forEach(function(item){ %>
+            <li><%= item %></li>
+        <% }); %>
+        </ul>
     <% }); %>
     </ul>
   </body>
