@@ -12,18 +12,9 @@ MongoClient.connect(mongoUrl, function(err, db) {
   // Return all lists
   router.get('/', function(req, res, next) {
     collection.find({}).toArray(function(err, docs) {
-      res.render('lists', JSON.parse(JSON.stringify(docs)));
+      res.render('lists', {docs : docs});
     })
   });
-
-
-  // Returns the list with the particular listID
-  router.get('/:listID', function(req, res, next) {
-    var listID = parseInt(req.params.listID);
-    collection.find({"listID":listID}).toArray(function(err, docs) {
-      res.json(JSON.parse(JSON.stringify(docs)));
-    })
-  })
 
   // Returns all the lists belonging to the particular user
   router.get('/owner/:userName', function(req, res, next) {
