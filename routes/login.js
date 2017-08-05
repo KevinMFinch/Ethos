@@ -11,7 +11,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
 
   // Return all lists
   router.get('/', function(req, res, next) {
-    res.render('login');
+    res.render('login', {"error" :""});
   });
 
   // Submit list post
@@ -21,6 +21,9 @@ MongoClient.connect(mongoUrl, function(err, db) {
     collection.find({"username" : username, "password" : password}).toArray(function(err, docs) {
       if (docs.length > 0) {
         res.redirect('/lists/owner/' + username);
+      }
+      else {
+        res.render('login', {"error" : "Username/Password combo doesnt exist. Try again"});
       }
     })
     
