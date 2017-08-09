@@ -23,6 +23,12 @@ MongoClient.connect(mongoUrl, function(err, db) {
 
   // Receive the post request for a signup
   router.post('/', function(req, res, next) {
+    db.collection("users").find({"username" : req.body.username}).toArray(function(err, docs) {
+      if (docs.length > 0) {
+         res.send("username already exists");
+      }
+    })
+    
     var listIDs = [];
     var insertDocs = [];
     var listCategories = ["Books", "Movies", "TV Shows", "Music", "Video Games"];
@@ -37,22 +43,16 @@ MongoClient.connect(mongoUrl, function(err, db) {
       bcrypt.hash(plainPass, saltRounds, function(err, hash) {
         // Store hash in your password DB. 
         db.collection("users").insertOne({
-          "username" : req.body.username,
-          "email" : req.body.email,
-          "password" : hash,
-          "listIDs" : listIDs
-        }, function(err, r) {
-          res.send("Success!");
+            "username" : req.body.username,
+            "email" : req.body.email,
+            "password" : hash,
+            "listIDs" : listIDs
+          }, function(err, r) {
+            res.send("Success!");
         });
-
       });
-      
     });
-    
   });
-
 })
-
-
 
 module.exports = router; 

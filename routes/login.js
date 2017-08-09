@@ -27,10 +27,13 @@ MongoClient.connect(mongoUrl, function(err, db) {
           if (passMatch == true) {
             res.redirect('/lists/owner/' + username);
           }
+          else {
+            res.render('login', {"error" : "Incorrect password."});
+          }
         });
       }
       else {
-        res.render('login', {"error" : "Username/Password combo doesnt exist. Try again"});
+        res.render('login', {"error" : "Username does not exist."});
       }
     })
     
