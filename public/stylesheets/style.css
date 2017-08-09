@@ -6,3 +6,16 @@ body {
 a {
   color: #00B7FF;
 }
+.list-group-item{
+	padding: 20px;
+}
+.container{
+	padding: 20px 0 0 0;
+}
+.panel-heading{
+	font-size: 30px;
+}
+div small{
+	color: #777777;
+	font-size: 20px;
+}
