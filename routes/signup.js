@@ -5,6 +5,9 @@ var router = express.Router();
 
 var listModel = require('../public/js/list.js');
 
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 var mongoUrl = "mongodb://localhost:27017/Ethos";
 
 
@@ -30,14 +33,20 @@ MongoClient.connect(mongoUrl, function(err, db) {
     db.collection("lists").insertMany(insertDocs, function(err, response) {
       listIDs = response.insertedIds;
       console.log(listIDs);
-      db.collection("users").insertOne({
-        "username" : req.body.username,
-        "email" : req.body.email,
-        "password" : req.body.password,
-        "listIDs" : listIDs
-      }, function(err, r) {
-        res.send("Success!");
+      var plainPass = req.body.password;
+      bcrypt.hash(plainPass, saltRounds, function(err, hash) {
+        // Store hash in your password DB. 
+        db.collection("users").insertOne({
+          "username" : req.body.username,
+          "email" : req.body.email,
+          "password" : hash,
+          "listIDs" : listIDs
+        }, function(err, r) {
+          res.send("Success!");
+        });
+
       });
+      
     });
     
   });
