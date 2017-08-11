@@ -26,3 +26,9 @@ div small{
 li.dropdown:hover > .dropdown-menu {
     display: block;
 }
+.input-group button{
+	float: right;
+}
+form{
+	width: 100%;
+}

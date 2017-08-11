@@ -129,10 +129,11 @@
                       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         <span class="caret"></span>
                       </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                      <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
                         <li><a href="#">Move to Current</a></li>
                         <li><a href="#">Move to Planned</a></li>
                         <li><a href="#">Edit</a></li>
+                        <li><a href="#">Remove</a></li>
                       </ul>
                     </div>
                 </li>
@@ -162,41 +163,43 @@
                 <%= doc.category %>
                 <small>Planned</small></div>
 
-              <ul class="list-group">
+                <% doc.planned.forEach(function(item){ %>
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                        <ul>   
+                            <%= item %>
+                        </ul>
+                        <div class="dropdown" style="float: right; bottom: 27px">
+                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Move to Current</a></li>
+                            <li><a href="#">Move to Completed</a></li>
+                            <li><a href="#">Edit</a></li>
+                            <li><a href="#">Remove</a></li>
+                          </ul>
+                        </div>
+                    </li>
+                  </ul>
+                <% }); %>
                 <li class="list-group-item">
-                    <ul>
-                    <% doc.planned.forEach(function(item){ %>
-                        <li><%= item %></li>
-                    <% }); %>
-                    </ul>
-                    <div class="dropdown" style="float: right; bottom: 7px">
-                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">Move to Current</a></li>
-                        <li><a href="#">Move to Completed</a></li>
-                        <li><a href="#">Edit</a></li>
-                      </ul>
-                    </div>
-                </li>
-                <li class="list-group-item">
+                <form action="/lists/planned" method="POST">
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="input-group">
-                          <form action="/lists/planned" method="POST">
                             <input type="text" class="form-control" name="item" placeholder="Item">
                             <input type="hidden" name="category" value=<%= doc.category %>>
-
                             <span class="input-group-btn">
                               <button class="btn btn-primary" type="submit">Add</button>
                             </span>
-                          </form>
+                        
+
                         </div><!-- /input-group -->
                       </div><!-- /.col-lg-6 -->
                     </div><!-- /.row -->
+                    </form>
                 </li>
-              </ul>
             </div>
         </div>
     </section>
@@ -219,10 +222,11 @@
                       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         <span class="caret"></span>
                       </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                      <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
                         <li><a href="#">Move to Planned</a></li>
                         <li><a href="#">Move to Completed</a></li>
                         <li><a href="#">Edit</a></li>
+                        <li><a href="#">Remove</a></li>
                       </ul>
                     </div>
                 </li>
