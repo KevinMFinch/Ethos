@@ -27,7 +27,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
   // Submit list post
   router.post('/', function(request, response){    
     console.log(request.body.newID); 
-    response.render('lists', {title: request.body.newID});
+    response.send(request.body.item);
   });
 
 })

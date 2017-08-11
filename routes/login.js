@@ -25,7 +25,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
         var hash = docs[0].password;
         bcrypt.compare(password, hash, function(err, passMatch) {
           if (passMatch == true) {
-            res.redirect('/lists/owner/' + username);
+            res.cookie("username", username).redirect('/lists/owner/' + username);
           }
           else {
             res.render('login', {"error" : "Incorrect password."});
