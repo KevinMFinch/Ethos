@@ -1,16 +1,14 @@
 body {
-  padding: 50px;
+  padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 30px 0px;
 }
 
 a {
   color: #00B7FF;
 }
-.list-group-item{
-	padding: 20px;
-}
 .container{
-	padding: 20px 0 0 0;
+	padding:60px 0 0 0;
 }
 .panel-heading{
 	font-size: 30px;
@@ -18,4 +16,13 @@ a {
 div small{
 	color: #777777;
 	font-size: 20px;
+}
+.navbar-default .navbar-nav > li.dropdown:hover > a, 
+.navbar-default .navbar-nav > li.dropdown:hover > a:hover,
+.navbar-default .navbar-nav > li.dropdown:hover > a:focus {
+    background-color: rgb(93,144,205);
+    color: #ffffff;
+}
+li.dropdown:hover > .dropdown-menu {
+    display: block;
 }

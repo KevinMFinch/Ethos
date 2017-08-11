@@ -32,11 +32,9 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Current</a></li>
-                <li><a href="#">Completed</a></li>
-                <li><a href="#">Planned</a></li>
-                <li role="separator" class="divider"></li>
+                <li><a href="#">New Catagory</a></li>
                 <li><a href="#">My Account</a></li>
+                <li role="separator" class="divider"></li>
                 <li><a href="#">Log Out</a></li>
               </ul>
             </li>
@@ -48,19 +46,57 @@
             <button type="submit" class="btn btn-default">Search</button>
           </form>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Books</a></li>
+            <!--li><a href="#">Books</a></li>
             <li><a href="#">Movies</a></li>
             <li><a href="#">TV Shows</a></li>
             <li><a href="#">Music</a></li>
-            <li><a href="#">Video Games</a></li>
+            <li><a href="#">Video Games</a></li-->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Books</a>
+              <ul class="dropdown-menu">
+                <li><a href="#current-book">Current</a></li>
+                <li><a href="#complete-book">Completed</a></li>
+                <li><a href="#planned-book">Planned</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Movies</a>
+              <ul class="dropdown-menu">
+                <li><a href="#current">Current</a></li>
+                <li><a href="#complete">Completed</a></li>
+                <li><a href="#planned">Planned</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">TV Shows</a>
+              <ul class="dropdown-menu">
+                <li><a href="#current">Current</a></li>
+                <li><a href="#complete">Completed</a></li>
+                <li><a href="#planned">Planned</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Music</a>
+              <ul class="dropdown-menu">
+                <li><a href="#current">Current</a></li>
+                <li><a href="#complete">Completed</a></li>
+                <li><a href="#planned">Planned</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Video Games</a>
+              <ul class="dropdown-menu">
+                <li><a href="#current">Current</a></li>
+                <li><a href="#complete">Completed</a></li>
+                <li><a href="#planned">Planned</a></li>
+              </ul>
+            </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Current</a></li>
-                <li><a href="#">Completed</a></li>
-                <li><a href="#">Planned</a></li>
-                <li role="separator" class="divider"></li>
+                <li><a href="#">New Catagory</a></li>
                 <li><a href="#">My Account</a></li>
+                <li role="separator" class="divider"></li>
                 <li><a href="#">Log Out</a></li>
               </ul>
             </li>
@@ -73,122 +109,132 @@
         <div class="page-header">
             <h1>What You Have, What You Want <small>Books made easy</small></h1>
         </div>
-
-        <div class="panel panel-default">
-          <!-- Default panel contents -->
-          <div class="panel-heading">
-        <% var doc = docs[0]; %>
-            <%= doc.category %>
-            <small>Completed</small></div>
-
-          <ul class="list-group">
-            <li class="list-group-item">
-                <% doc.completed.forEach(function(item){ %>
-                    <%= item %>
-                <% }); %>
-                <div class="dropdown" style="float: right">
-                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="#">Move to Want</a></li>
-                    <li><a href="#">Move to Finished</a></li>
-                    <li><a href="#">Edit</a></li>
-                  </ul>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Item">
-                      <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit">Add</button>
-                      </span>
-                    </div><!-- /input-group -->
-                  </div><!-- /.col-lg-6 -->
-                </div><!-- /.row -->
-            </li>
-          </ul>
-        </div>
     </div>
-    <div class="container">
-        <div class="panel panel-default">
-          <!-- Default panel contents -->
-          <div class="panel-heading">
-        <% var doc = docs[0]; %>
-            <%= doc.category %>
-            <small>Planned</small></div>
 
-          <ul class="list-group">
-            <li class="list-group-item">
-                <% doc.planned.forEach(function(item){ %>
-                    <%= item %>
-                <% }); %>
-                <div class="dropdown" style="float: right">
-                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="#">Move to Want</a></li>
-                    <li><a href="#">Move to Finished</a></li>
-                    <li><a href="#">Edit</a></li>
-                  </ul>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Item">
-                      <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit">Add</button>
-                      </span>
-                    </div><!-- /input-group -->
-                  </div><!-- /.col-lg-6 -->
-                </div><!-- /.row -->
-            </li>
-          </ul>
-        </div>
-    </div>
-    <div class="container">
-        <div class="panel panel-default">
-          <!-- Default panel contents -->
-          <div class="panel-heading">
-        <% var doc = docs[0]; %>
-            <%= doc.category %>
-            <small>Current</small></div>
+    <section id="complete-book">
+        <div class="container">
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">
+            <% var doc = docs[0]; %>
+                <%= doc.category %>
+                <small>Completed</small></div>
 
-          <ul class="list-group">
-            <li class="list-group-item">
-                <% doc.current.forEach(function(item){ %>
-                    <%= item %>
-                <% }); %>
-                <div class="dropdown" style="float: right">
-                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="#">Move to Want</a></li>
-                    <li><a href="#">Move to Finished</a></li>
-                    <li><a href="#">Edit</a></li>
-                  </ul>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Item">
-                      <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit">Add</button>
-                      </span>
-                    </div><!-- /input-group -->
-                  </div><!-- /.col-lg-6 -->
-                </div><!-- /.row -->
-            </li>
-          </ul>
+              <ol class="list-group">
+                <li class="list-group-item">
+                    <% doc.completed.forEach(function(item){ %>
+                        <%= item %>
+                    <% }); %>
+                    <div class="dropdown" style="float: right; bottom: 7px">
+                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Move to Current</a></li>
+                        <li><a href="#">Move to Planned</a></li>
+                        <li><a href="#">Edit</a></li>
+                      </ul>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <input type="text" class="form-control" placeholder="Item">
+                          <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit">Add</button>
+                          </span>
+                        </div><!-- /input-group -->
+                      </div><!-- /.col-lg-6 -->
+                    </div><!-- /.row -->
+                </li>
+              </ol>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section id="planned-book">
+        <div class="container">
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">
+            <% var doc = docs[0]; %>
+                <%= doc.category %>
+                <small>Planned</small></div>
+
+              <ul class="list-group">
+                <li class="list-group-item">
+                    <% doc.planned.forEach(function(item){ %>
+                        <%= item %>
+                    <% }); %>
+                    <div class="dropdown" style="float: right; bottom: 7px">
+                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Move to Current</a></li>
+                        <li><a href="#">Move to Completed</a></li>
+                        <li><a href="#">Edit</a></li>
+                      </ul>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <input type="text" class="form-control" placeholder="Item">
+                          <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit">Add</button>
+                          </span>
+                        </div><!-- /input-group -->
+                      </div><!-- /.col-lg-6 -->
+                    </div><!-- /.row -->
+                </li>
+              </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="current-book">
+        <div class="container">
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">
+            <% var doc = docs[0]; %>
+                <%= doc.category %>
+                <small>Current</small></div>
+
+              <ul class="list-group">
+                <li class="list-group-item">
+                    <% doc.current.forEach(function(item){ %>
+                        <%= item %>
+                    <% }); %>
+                    <div class="dropdown" style="float: right; bottom: 7px">
+                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Move to Planned</a></li>
+                        <li><a href="#">Move to Completed</a></li>
+                        <li><a href="#">Edit</a></li>
+                      </ul>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <input type="text" class="form-control" placeholder="Item">
+                          <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit">Add</button>
+                          </span>
+                        </div><!-- /input-group -->
+                      </div><!-- /.col-lg-6 -->
+                    </div><!-- /.row -->
+                </li>
+              </ul>
+            </div>
+        </div>
+    </section>
   </body>
 </html>
