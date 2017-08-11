@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
+var cookieParser = require('cookie-parser');
 
 
 var mongoUrl = "mongodb://localhost:27017/Ethos";
@@ -25,9 +26,17 @@ MongoClient.connect(mongoUrl, function(err, db) {
   });
 
   // Submit list post
-  router.post('/', function(request, response){    
-    console.log(request.body.newID); 
-    response.send(request.body.item);
+  router.post('/planned', function(req, res){    
+    var item = req.body.item;
+    var username = req.cookies.username;
+    var category = req.body.category;
+    collection.findOne({"owner" : username}, function(err, doc) {
+      var plannedArray = doc.planned;
+      plannedArray.push(item);
+      collection.update({"owner": username, "category": category},{ $set: {"planned" : plannedArray}}, {multi: true}, function(err, doc) {
+        res.redirect('/lists/owner/' + username);
+      })
+    })
   });
 
 })

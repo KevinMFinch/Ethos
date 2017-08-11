@@ -46,7 +46,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
                 "password" : hash,
                 "listIDs" : listIDs
               }, function(err, r) {
-                res.cookie("username", req.body.username.toLowerCase()).redirect("/lists/owner" + req.body.username.toLowerCase());
+                res.cookie("username", req.body.username.toLowerCase()).redirect("/lists/owner/" + req.body.username.toLowerCase());
             });
           });
         });
