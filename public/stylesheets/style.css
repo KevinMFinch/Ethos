@@ -32,3 +32,12 @@ li.dropdown:hover > .dropdown-menu {
 form{
 	width: 100%;
 }
+.open{
+	text-align: center;
+}
+.open h1{
+	font-size: 75px;
+}
+.open p a{
+	text-decoration: none;
+}
