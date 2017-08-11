@@ -18,7 +18,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
 
   // Submit list post
   router.post('/', function(req, res){    
-    var username = req.body.username;
+    var username = req.body.username.toLowerCase();
     var password = req.body.password;
     collection.find({"username" : username}).toArray(function(err, docs) {
       if (docs.length > 0) {

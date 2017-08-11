@@ -23,7 +23,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
 
   // Receive the post request for a signup
   router.post('/', function(req, res, next) {
-    db.collection("users").find({"username" : req.body.username}).toArray(function(err, docs) {
+    db.collection("users").find({"username" : req.body.username.toLowerCase()}).toArray(function(err, docs) {
       if (docs.length > 0) {
          res.render('signup', {"error" : "username already exists"});
       } else {
@@ -31,7 +31,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
         var insertDocs = [];
         var listCategories = ["Books", "Movies", "TV Shows", "Music", "Video Games"];
         for (var i = 0; i < listCategories.length; i++) {
-          insertDocs.push(listModel.list(req.body.username, listCategories[i]));
+          insertDocs.push(listModel.list(req.body.username.toLowerCase(), listCategories[i]));
         }
 
         db.collection("lists").insertMany(insertDocs, function(err, response) {
@@ -41,7 +41,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
           bcrypt.hash(plainPass, saltRounds, function(err, hash) {
             // Store hash in your password DB. 
             db.collection("users").insertOne({
-                "username" : req.body.username,
+                "username" : req.body.username.toLowerCase(),
                 "email" : req.body.email,
                 "password" : hash,
                 "listIDs" : listIDs
