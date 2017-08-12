@@ -123,19 +123,19 @@
                     </li>
                 <% }); %>
                     <li class="list-group-item">
-                    <!--form action="/lists/current" method="POST"-->
+                    <form action="/lists/completed" method="POST">
                         <div class="row">
                           <div class="col-lg-6">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="item" placeholder="Item">
                                 <input type="hidden" name="category" value=<%= doc.category %>>
                                 <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="submit">Add</button>
-                              </span>
+                                  <button class="btn btn-primary" type="submit">Add</button>
+                                </span>
                             </div><!-- /input-group -->
                           </div><!-- /.col-lg-6 -->
                         </div><!-- /.row -->
-                    <!--/form-->
+                    </form>
                     </li>
                   </ul>
             </div>
@@ -215,19 +215,19 @@
                     </li>
                 <% }); %>
                     <li class="list-group-item">
-                    <!--form action="/lists/current" method="POST"-->
+                    <form action="/lists/current" method="POST">
                         <div class="row">
                           <div class="col-lg-6">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="item" placeholder="Item">
                                 <input type="hidden" name="category" value=<%= doc.category %>>
                                 <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="submit">Add</button>
-                              </span>
+                                  <button class="btn btn-primary" type="submit">Add</button>
+                                </span>
                             </div><!-- /input-group -->
                           </div><!-- /.col-lg-6 -->
                         </div><!-- /.row -->
-                    <!--/form-->
+                    </form>
                     </li>
                   </ul>
             </div>
