@@ -44,7 +44,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
       else if (type == "current")
         array = doc.current;
       array.push(item);
-      collection.update({"owner": username, "category": category},{ $set: {[type] : array}}, {multi: true}, function(err, doc) {
+      collection.update({"owner": username, "category": category},{ $set: {[type] : array}}, function(err, doc) {
         res.redirect('/lists/owner/' + username);
       })
     })
