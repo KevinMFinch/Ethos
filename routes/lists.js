@@ -26,14 +26,25 @@ MongoClient.connect(mongoUrl, function(err, db) {
   });
 
   // Submit list post
-  router.post('/planned', function(req, res){    
+  router.post('/:type', function(req, res){    
     var item = req.body.item;
     var username = req.cookies.username;
     var category = req.body.category;
+    var type = req.params.type;
     collection.findOne({"owner" : username}, function(err, doc) {
-      var plannedArray = doc.planned;
-      plannedArray.push(item);
-      collection.update({"owner": username, "category": category},{ $set: {"planned" : plannedArray}}, {multi: true}, function(err, doc) {
+      var array;
+      if (type == "planned")
+        array = doc.planned;
+      else if (type == "completed")
+        array = doc.completed;
+      else if (type == "onHold")
+        array = doc.onHold;
+      else if (type == "dropped")
+        array = doc.dropped;
+      else if (type == "current")
+        array = doc.current;
+      array.push(item);
+      collection.update({"owner": username, "category": category},{ $set: {[type] : array}}, {multi: true}, function(err, doc) {
         res.redirect('/lists/owner/' + username);
       })
     })
