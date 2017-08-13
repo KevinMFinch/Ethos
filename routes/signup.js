@@ -38,7 +38,9 @@ MongoClient.connect(mongoUrl, function(err, db) {
           listIDs = response.insertedIds;
           console.log(listIDs);
           var plainPass = req.body.password;
-          bcrypt.hash(plainPass, saltRounds, function(err, hash) {
+          var validatePass = req.body.validatePassword;
+          if (plainPass == validatePass) {
+            bcrypt.hash(plainPass, saltRounds, function(err, hash) {
             // Store hash in your password DB. 
             db.collection("users").insertOne({
                 "username" : req.body.username.toLowerCase(),
@@ -47,12 +49,14 @@ MongoClient.connect(mongoUrl, function(err, db) {
                 "listIDs" : listIDs
               }, function(err, r) {
                 res.cookie("username", req.body.username.toLowerCase()).redirect("/lists/owner/" + req.body.username.toLowerCase());
+              });
             });
-          });
+          } else {
+            res.render('signup', {"error" : "Passwords don't match"});
+          }
         });
       }
     });
-    
   });
 })
 
