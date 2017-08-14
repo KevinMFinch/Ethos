@@ -23,7 +23,8 @@ MongoClient.connect(mongoUrl, function(err, db) {
 
   // Receive the post request for a signup
   router.post('/', function(req, res, next) {
-    db.collection("users").find({"username" : req.body.username.toLowerCase()}).toArray(function(err, docs) {
+    var username = req.body.username.toLowerCase();
+    db.collection("users").find({"username" : username}).toArray(function(err, docs) {
       if (docs.length > 0) {
          res.render('signup', {"error" : "username already exists"});
       } else {
@@ -31,24 +32,23 @@ MongoClient.connect(mongoUrl, function(err, db) {
         var insertDocs = [];
         var listCategories = ["Books", "Movies", "TV Shows", "Music", "Video Games"];
         for (var i = 0; i < listCategories.length; i++) {
-          insertDocs.push(listModel.list(req.body.username.toLowerCase(), listCategories[i]));
+          insertDocs.push(listModel.list(username, listCategories[i]));
         }
 
         db.collection("lists").insertMany(insertDocs, function(err, response) {
           listIDs = response.insertedIds;
-          console.log(listIDs);
           var plainPass = req.body.password;
           var validatePass = req.body.validatePassword;
           if (plainPass == validatePass) {
             bcrypt.hash(plainPass, saltRounds, function(err, hash) {
-            // Store hash in your password DB. 
+            // Store hash in your password DB.
             db.collection("users").insertOne({
-                "username" : req.body.username.toLowerCase(),
+                "username" : username,
                 "email" : req.body.email,
                 "password" : hash,
                 "listIDs" : listIDs
               }, function(err, r) {
-                res.cookie("username", req.body.username.toLowerCase()).redirect("/lists/owner/" + req.body.username.toLowerCase());
+                res.cookie("username", username).redirect("/lists/owner/" + username);
               });
             });
           } else {
@@ -60,4 +60,4 @@ MongoClient.connect(mongoUrl, function(err, db) {
   });
 })
 
-module.exports = router; 
+module.exports = router;
