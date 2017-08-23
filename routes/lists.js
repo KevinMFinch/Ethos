@@ -26,12 +26,13 @@ MongoClient.connect(mongoUrl, function(err, db) {
   });
 
   // Submit list post
-  router.post('/:type', function(req, res){
+  router.post('/:category/:type', function(req, res){
     var item = req.body.item;
     var username = req.cookies.username;
-    var category = req.body.category;
+    var category = req.params.category;
+
     var type = req.params.type;
-    collection.findOne({"owner" : username}, function(err, doc) {
+    collection.findOne({"owner" : username, "category" : category}, function(err, doc) {
       var array;
       if (type == "planned")
         array = doc.planned;
