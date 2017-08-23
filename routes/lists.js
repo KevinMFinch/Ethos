@@ -30,8 +30,13 @@ MongoClient.connect(mongoUrl, function(err, db) {
     var item = req.body.item;
     var username = req.cookies.username;
     var category = req.params.category;
-
     var type = req.params.type;
+    if (category.includes("TV")) {
+      category = "TV Shows";
+    }
+    if (category.includes("Video")) {
+      category = "Video Games";
+    }
     collection.findOne({"owner" : username, "category" : category}, function(err, doc) {
       var array;
       if (type == "planned")

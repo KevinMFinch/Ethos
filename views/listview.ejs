@@ -125,12 +125,11 @@
                       </ul>
                     <% }); %>
                     <li class="list-group-item">
-                        <form action=<%= "/lists/" + doc.category +"/completed" %> method="POST">
+                        <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/completed" %> method="POST">
                             <div class="row">
                               <div class="col-lg-6">
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="item" placeholder="Item">
-                                    <input type="hidden" name="category" value=<%= doc.category %>>
                                     <span class="input-group-btn">
                                       <button class="btn btn-primary" type="submit">Add</button>
                                     </span>
@@ -170,12 +169,11 @@
                       </ul>
                     <% }); %>
                     <li class="list-group-item">
-                        <form action=<%= "/lists/" + doc.category +"/planned" %> method="POST">
+                        <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/planned" %> method="POST">
                             <div class="row">
                               <div class="col-lg-6">
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="item" placeholder="Item">
-                                    <input type="hidden" name="category" value=<%= doc.category %>>
                                     <span class="input-group-btn">
                                       <button class="btn btn-primary" type="submit">Add</button>
                                     </span>
@@ -215,12 +213,11 @@
                       </ul>
                     <% }); %>
                     <li class="list-group-item">
-                        <form action=<%= "/lists/" + doc.category +"/current" %> method="POST">
+                        <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/current" %> method="POST">
                             <div class="row">
                               <div class="col-lg-6">
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="item" placeholder="Item">
-                                    <input type="hidden" name="category" value=<%= doc.category %>>
                                     <span class="input-group-btn">
                                       <button class="btn btn-primary" type="submit">Add</button>
                                     </span>
@@ -260,12 +257,11 @@
                       </ul>
                     <% }); %>
                     <li class="list-group-item">
-                        <form action=<%= "/lists/" + doc.category +"/dropped" %> method="POST">
+                        <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/dropped" %> method="POST">
                             <div class="row">
                               <div class="col-lg-6">
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="item" placeholder="Item">
-                                    <input type="hidden" name="category" value=<%= doc.category %>>
                                     <span class="input-group-btn">
                                       <button class="btn btn-primary" type="submit">Add</button>
                                     </span>
@@ -305,12 +301,11 @@
                       </ul>
                     <% }); %>
                     <li class="list-group-item">
-                        <form action=<%= "/lists/" + doc.category +"/onHold" %> method="POST">
+                        <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/onHold" %> method="POST">
                             <div class="row">
                               <div class="col-lg-6">
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="item" placeholder="Item">
-                                    <input type="hidden" name="category" value=<%= doc.category %>>
                                     <span class="input-group-btn">
                                       <button class="btn btn-primary" type="submit">Add</button>
                                     </span>
