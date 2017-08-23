@@ -90,13 +90,15 @@
         </div><!-- /.container-fluid -->
     </nav>
 
+    <% var doc = docs[1]; %>
+
     <div class="container">
         <div class="page-header">
-            <h1>What You Have, What You Want <small>Books made easy</small></h1>
+            <h1>What You Have, What You Want <small><%= doc.category %> made easy</small></h1>
         </div>
     </div>
 
-    <% var doc = docs[0]; %>
+
     <section id="completed">
         <div class="container">
             <div class="panel panel-default">
@@ -147,7 +149,6 @@
             <div class="panel panel-default">
               <!-- Default panel contents -->
               <div class="panel-heading">
-            <% var doc = docs[0]; %>
                 <%= doc.category %>
                 <small>Planned</small></div>
 
@@ -193,7 +194,6 @@
             <div class="panel panel-default">
               <!-- Default panel contents -->
               <div class="panel-heading">
-            <% var doc = docs[0]; %>
                 <%= doc.category %>
                 <small>Current</small></div>
 
@@ -239,7 +239,6 @@
             <div class="panel panel-default">
               <!-- Default panel contents -->
               <div class="panel-heading">
-            <% var doc = docs[0]; %>
                 <%= doc.category %>
                 <small>Dropped</small></div>
 
@@ -285,7 +284,6 @@
             <div class="panel panel-default">
               <!-- Default panel contents -->
               <div class="panel-heading">
-            <% var doc = docs[0]; %>
                 <%= doc.category %>
                 <small>On Hold</small></div>
 
