@@ -41,36 +41,6 @@ form{
 .open p a{
 	text-decoration: none;
 }
-.login{
-	border: 1px solid #D8DEE2;
-	border-radius: 5px;
-	width: 25%;
-	padding: 40px 40px 40px 70px;
-	margin: 0 0 0 510px;
-	font-size: 20px;
-	background-color: #eeeeee;
-}
-.login p, .login div{
-	padding: 10px 0 0 0;
-}
-.login button{
-	background-color: #337AB7;
-}
-.signup{
-	border: 1px solid #D8DEE2;
-	border-radius: 5px;
-	width: 25%;
-	padding: 40px 40px 40px 70px;
-	margin: 0 0 0 510px;
-	font-size: 15px;
-	background-color: #eeeeee;
-}
-.signup p, .signup div{
-	padding: 10px 0 0 0;
-}
-.signup input{
-	width: 90%;
-}
 .well{
 	width: 100%;
 	text-align: center;
