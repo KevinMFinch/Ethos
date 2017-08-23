@@ -21,24 +21,26 @@ MongoClient.connect(mongoUrl, function(err, db) {
     var username = req.cookies.username;
     var category = req.params.category;
     category = category.charAt(0).toUpperCase() + category.slice(1);
-    if (category.includes("Tv")) {
+    if (category.toLowerCase().includes("tv")) {
       category = "TV Shows";
     }
-    if (category.includes("Video")) {
+    if (category.toLowerCase().includes("video")) {
       category = "Video Games";
     }
-    collection.find({"owner": username, "category": category}).toArray(function(err, docs) {
-      res.render('listview', {docs: docs});
-    })
+    collection.findOne({"owner": username, "category": category}, function(err, doc) {
+      res.render('listview', {doc: doc});
+    });
+
   })
 
   // Returns all the lists belonging to the particular user
+  /*
   router.get('/owner/:userName', function(req, res, next) {
     var userName = req.params.userName;
     collection.find({"owner": userName}).toArray(function(err, docs) {
       res.render('listview', {docs: docs});
     })
-  });
+  }); */
 
   // Submit list post
   router.post('/:category/:type', function(req, res){

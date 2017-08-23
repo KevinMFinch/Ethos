@@ -90,234 +90,231 @@
         </div><!-- /.container-fluid -->
     </nav>
 
-    <% for(var i = 0; i < docs.length; i++) { %>
-        <% var doc = docs[i]; %>
+    <div class="container">
+        <div class="page-header">
+            <h1>What You Have, What You Want <small><%= doc.category %> made easy</small></h1>
+        </div>
+    </div>
+
+    <section id="completed">
         <div class="container">
-            <div class="page-header">
-                <h1>What You Have, What You Want <small><%= doc.category %> made easy</small></h1>
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">
+                <%= doc.category %>
+                <small>Completed</small></div>
+
+                <% doc.completed.forEach(function(item){ %>
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                        <%= item %>
+                        <div class="dropdown" style="float: right; bottom: 7px">
+                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Move to Current</a></li>
+                            <li><a href="#">Move to Planned</a></li>
+                            <li><a href="#">Edit</a></li>
+                            <li><a href="#">Remove</a></li>
+                          </ul>
+                        </div>
+                    </li>
+                  </ul>
+                <% }); %>
+                <li class="list-group-item">
+                    <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/completed" %> method="POST">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="item" placeholder="Item">
+                                <span class="input-group-btn">
+                                  <button class="btn btn-primary" type="submit">Add</button>
+                                </span>
+                            </div><!-- /input-group -->
+                          </div><!-- /.col-lg-6 -->
+                        </div><!-- /.row -->
+                    </form>
+                </li>
             </div>
         </div>
+    </section>
 
-        <section id="completed">
-            <div class="container">
-                <div class="panel panel-default">
-                  <!-- Default panel contents -->
-                  <div class="panel-heading">
-                    <%= doc.category %>
-                    <small>Completed</small></div>
+    <section id="planned">
+        <div class="container">
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">
+                <%= doc.category %>
+                <small>Planned</small></div>
 
-                    <% doc.completed.forEach(function(item){ %>
-                      <ul class="list-group">
-                        <li class="list-group-item">
-                            <%= item %>
-                            <div class="dropdown" style="float: right; bottom: 7px">
-                              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <span class="caret"></span>
-                              </button>
-                              <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">Move to Current</a></li>
-                                <li><a href="#">Move to Planned</a></li>
-                                <li><a href="#">Edit</a></li>
-                                <li><a href="#">Remove</a></li>
-                              </ul>
-                            </div>
-                        </li>
-                      </ul>
-                    <% }); %>
+                <% doc.planned.forEach(function(item){ %>
+                  <ul class="list-group">
                     <li class="list-group-item">
-                        <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/completed" %> method="POST">
-                            <div class="row">
-                              <div class="col-lg-6">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="item" placeholder="Item">
-                                    <span class="input-group-btn">
-                                      <button class="btn btn-primary" type="submit">Add</button>
-                                    </span>
-                                </div><!-- /input-group -->
-                              </div><!-- /.col-lg-6 -->
-                            </div><!-- /.row -->
-                        </form>
+                        <%= item %>
+                        <div class="dropdown" style="float: right; bottom: 7px">
+                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Move to Current</a></li>
+                            <li><a href="#">Move to Completed</a></li>
+                            <li><a href="#">Edit</a></li>
+                            <li><a href="#">Remove</a></li>
+                          </ul>
+                        </div>
                     </li>
-                </div>
+                  </ul>
+                <% }); %>
+                <li class="list-group-item">
+                    <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/planned" %> method="POST">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="item" placeholder="Item">
+                                <span class="input-group-btn">
+                                  <button class="btn btn-primary" type="submit">Add</button>
+                                </span>
+                            </div><!-- /input-group -->
+                          </div><!-- /.col-lg-6 -->
+                        </div><!-- /.row -->
+                    </form>
+                </li>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="planned">
-            <div class="container">
-                <div class="panel panel-default">
-                  <!-- Default panel contents -->
-                  <div class="panel-heading">
-                    <%= doc.category %>
-                    <small>Planned</small></div>
+    <section id="current">
+        <div class="container">
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">
+                <%= doc.category %>
+                <small>Current</small></div>
 
-                    <% doc.planned.forEach(function(item){ %>
-                      <ul class="list-group">
-                        <li class="list-group-item">
-                            <%= item %>
-                            <div class="dropdown" style="float: right; bottom: 7px">
-                              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <span class="caret"></span>
-                              </button>
-                              <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">Move to Current</a></li>
-                                <li><a href="#">Move to Completed</a></li>
-                                <li><a href="#">Edit</a></li>
-                                <li><a href="#">Remove</a></li>
-                              </ul>
-                            </div>
-                        </li>
-                      </ul>
-                    <% }); %>
+                <% doc.current.forEach(function(item){ %>
+                  <ul class="list-group">
                     <li class="list-group-item">
-                        <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/planned" %> method="POST">
-                            <div class="row">
-                              <div class="col-lg-6">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="item" placeholder="Item">
-                                    <span class="input-group-btn">
-                                      <button class="btn btn-primary" type="submit">Add</button>
-                                    </span>
-                                </div><!-- /input-group -->
-                              </div><!-- /.col-lg-6 -->
-                            </div><!-- /.row -->
-                        </form>
+                        <%= item %>
+                        <div class="dropdown" style="float: right; bottom: 7px">
+                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Move to Planned</a></li>
+                            <li><a href="#">Move to Completed</a></li>
+                            <li><a href="#">Edit</a></li>
+                            <li><a href="#">Remove</a></li>
+                          </ul>
+                        </div>
                     </li>
-                </div>
+                  </ul>
+                <% }); %>
+                <li class="list-group-item">
+                    <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/current" %> method="POST">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="item" placeholder="Item">
+                                <span class="input-group-btn">
+                                  <button class="btn btn-primary" type="submit">Add</button>
+                                </span>
+                            </div><!-- /input-group -->
+                          </div><!-- /.col-lg-6 -->
+                        </div><!-- /.row -->
+                    </form>
+                </li>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="current">
-            <div class="container">
-                <div class="panel panel-default">
-                  <!-- Default panel contents -->
-                  <div class="panel-heading">
-                    <%= doc.category %>
-                    <small>Current</small></div>
+    <section id="dropped">
+        <div class="container">
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">
+                <%= doc.category %>
+                <small>Dropped</small></div>
 
-                    <% doc.current.forEach(function(item){ %>
-                      <ul class="list-group">
-                        <li class="list-group-item">
-                            <%= item %>
-                            <div class="dropdown" style="float: right; bottom: 7px">
-                              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <span class="caret"></span>
-                              </button>
-                              <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">Move to Planned</a></li>
-                                <li><a href="#">Move to Completed</a></li>
-                                <li><a href="#">Edit</a></li>
-                                <li><a href="#">Remove</a></li>
-                              </ul>
-                            </div>
-                        </li>
-                      </ul>
-                    <% }); %>
+                <% doc.dropped.forEach(function(item){ %>
+                  <ul class="list-group">
                     <li class="list-group-item">
-                        <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/current" %> method="POST">
-                            <div class="row">
-                              <div class="col-lg-6">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="item" placeholder="Item">
-                                    <span class="input-group-btn">
-                                      <button class="btn btn-primary" type="submit">Add</button>
-                                    </span>
-                                </div><!-- /input-group -->
-                              </div><!-- /.col-lg-6 -->
-                            </div><!-- /.row -->
-                        </form>
+                        <%= item %>
+                        <div class="dropdown" style="float: right; bottom: 7px">
+                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Move to Planned</a></li>
+                            <li><a href="#">Move to Completed</a></li>
+                            <li><a href="#">Edit</a></li>
+                            <li><a href="#">Remove</a></li>
+                          </ul>
+                        </div>
                     </li>
-                </div>
+                  </ul>
+                <% }); %>
+                <li class="list-group-item">
+                    <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/dropped" %> method="POST">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="item" placeholder="Item">
+                                <span class="input-group-btn">
+                                  <button class="btn btn-primary" type="submit">Add</button>
+                                </span>
+                            </div><!-- /input-group -->
+                          </div><!-- /.col-lg-6 -->
+                        </div><!-- /.row -->
+                    </form>
+                </li>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="dropped">
-            <div class="container">
-                <div class="panel panel-default">
-                  <!-- Default panel contents -->
-                  <div class="panel-heading">
-                    <%= doc.category %>
-                    <small>Dropped</small></div>
+    <section id="onHold">
+        <div class="container">
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">
+                <%= doc.category %>
+                <small>On Hold</small></div>
 
-                    <% doc.dropped.forEach(function(item){ %>
-                      <ul class="list-group">
-                        <li class="list-group-item">
-                            <%= item %>
-                            <div class="dropdown" style="float: right; bottom: 7px">
-                              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <span class="caret"></span>
-                              </button>
-                              <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">Move to Planned</a></li>
-                                <li><a href="#">Move to Completed</a></li>
-                                <li><a href="#">Edit</a></li>
-                                <li><a href="#">Remove</a></li>
-                              </ul>
-                            </div>
-                        </li>
-                      </ul>
-                    <% }); %>
+                <% doc.onHold.forEach(function(item){ %>
+                  <ul class="list-group">
                     <li class="list-group-item">
-                        <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/dropped" %> method="POST">
-                            <div class="row">
-                              <div class="col-lg-6">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="item" placeholder="Item">
-                                    <span class="input-group-btn">
-                                      <button class="btn btn-primary" type="submit">Add</button>
-                                    </span>
-                                </div><!-- /input-group -->
-                              </div><!-- /.col-lg-6 -->
-                            </div><!-- /.row -->
-                        </form>
+                        <%= item %>
+                        <div class="dropdown" style="float: right; bottom: 7px">
+                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Move to Planned</a></li>
+                            <li><a href="#">Move to Completed</a></li>
+                            <li><a href="#">Edit</a></li>
+                            <li><a href="#">Remove</a></li>
+                          </ul>
+                        </div>
                     </li>
-                </div>
+                  </ul>
+                <% }); %>
+                <li class="list-group-item">
+                    <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/onHold" %> method="POST">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="item" placeholder="Item">
+                                <span class="input-group-btn">
+                                  <button class="btn btn-primary" type="submit">Add</button>
+                                </span>
+                            </div><!-- /input-group -->
+                          </div><!-- /.col-lg-6 -->
+                        </div><!-- /.row -->
+                    </form>
+                </li>
             </div>
-        </section>
-
-        <section id="onHold">
-            <div class="container">
-                <div class="panel panel-default">
-                  <!-- Default panel contents -->
-                  <div class="panel-heading">
-                    <%= doc.category %>
-                    <small>On Hold</small></div>
-
-                    <% doc.onHold.forEach(function(item){ %>
-                      <ul class="list-group">
-                        <li class="list-group-item">
-                            <%= item %>
-                            <div class="dropdown" style="float: right; bottom: 7px">
-                              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <span class="caret"></span>
-                              </button>
-                              <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">Move to Planned</a></li>
-                                <li><a href="#">Move to Completed</a></li>
-                                <li><a href="#">Edit</a></li>
-                                <li><a href="#">Remove</a></li>
-                              </ul>
-                            </div>
-                        </li>
-                      </ul>
-                    <% }); %>
-                    <li class="list-group-item">
-                        <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/onHold" %> method="POST">
-                            <div class="row">
-                              <div class="col-lg-6">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="item" placeholder="Item">
-                                    <span class="input-group-btn">
-                                      <button class="btn btn-primary" type="submit">Add</button>
-                                    </span>
-                                </div><!-- /input-group -->
-                              </div><!-- /.col-lg-6 -->
-                            </div><!-- /.row -->
-                        </form>
-                    </li>
-                </div>
-            </div>
-        </section>
-    <% } %>
+        </div>
+    </section>
 
   </body>
 </html>
