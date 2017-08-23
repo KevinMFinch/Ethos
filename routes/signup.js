@@ -8,7 +8,7 @@ var listModel = require('../public/js/list.js');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-var mongoUrl = "mongodb://localhost:27017/Ethos";
+var mongoUrl = require('../public/js/mongourl.js').mongourl;
 
 
 /* GET users listing. */

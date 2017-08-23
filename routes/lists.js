@@ -4,7 +4,7 @@ var MongoClient = require('mongodb').MongoClient;
 var cookieParser = require('cookie-parser');
 
 
-var mongoUrl = "mongodb://localhost:27017/Ethos";
+var mongoUrl = require('../public/js/mongourl.js').mongourl;
 
 MongoClient.connect(mongoUrl, function(err, db) {
 
@@ -71,7 +71,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
         array = doc.current;
       array.push(item);
       collection.update({"owner": username, "category": category},{ $set: {[type] : array}}, function(err, doc) {
-        res.redirect('/lists/owner/' + username + "#" + type);
+        res.redirect('/lists/' + category +  "#" + type);
       })
     })
   });
