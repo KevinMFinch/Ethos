@@ -5,10 +5,10 @@ var MongoClient = require('mongodb').MongoClient;
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-var mongoUrl = "mongodb://localhost:27017/Ethos";
+var mongoUrl = require('../public/js/mongourl.js').mongourl;
 
 MongoClient.connect(mongoUrl, function(err, db) {
-  
+
   var collection = db.collection("users");
 
   // Return all lists
@@ -17,7 +17,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
   });
 
   // Submit list post
-  router.post('/', function(req, res){    
+  router.post('/', function(req, res){
     var username = req.body.username.toLowerCase();
     var password = req.body.password;
     collection.find({"username" : username}).toArray(function(err, docs) {
@@ -25,7 +25,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
         var hash = docs[0].password;
         bcrypt.compare(password, hash, function(err, passMatch) {
           if (passMatch == true) {
-            res.cookie("username", username).redirect('/lists/owner/' + username);
+            res.cookie("username", username).redirect('/lists/books');
           }
           else {
             res.render('login', {"error" : "Incorrect password."});
@@ -36,7 +36,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
         res.render('login', {"error" : "Username does not exist."});
       }
     })
-    
+
   });
 
 })

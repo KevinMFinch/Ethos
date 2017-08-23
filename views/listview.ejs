@@ -37,43 +37,59 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Books</a>
+              <a href="/lists/books" class="dropdown-toggle" data-toggle="dropdown">Books</a>
               <ul class="dropdown-menu">
+<<<<<<< HEAD
                 <li><a>Current</a></li>
                 <li><a>Completed</a></li>
                 <li><a>Planned</a></li>
+=======
+                <li><a href="/lists/books#completed">Current</a></li>
+                <li><a href="/lists/books#current">Completed</a></li>
+                <li><a href="/lists/books#planned">Planned</a></li>
+                <li><a href="/lists/books#onHold">On Hold</a></li>
+                <li><a href="/lists/books#dropped">Dropped</a></li>
+>>>>>>> 73da9ac65d310d25bb794d666de6afe5122d0232
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Movies</a>
+              <a href="/lists/movies" class="dropdown-toggle" data-toggle="dropdown">Movies</a>
               <ul class="dropdown-menu">
-                <li><a href="#current">Current</a></li>
-                <li><a href="#complete">Completed</a></li>
-                <li><a href="#planned">Planned</a></li>
+                <li><a href="/lists/movies#completed">Current</a></li>
+                <li><a href="/lists/movies#current">Completed</a></li>
+                <li><a href="/lists/movies#planned">Planned</a></li>
+                <li><a href="/lists/movies#onHold">On Hold</a></li>
+                <li><a href="/lists/movies#dropped">Dropped</a></li>
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">TV Shows</a>
+              <a href="/lists/tvshows" class="dropdown-toggle" data-toggle="dropdown">TV Shows</a>
               <ul class="dropdown-menu">
-                <li><a href="#current">Current</a></li>
-                <li><a href="#complete">Completed</a></li>
-                <li><a href="#planned">Planned</a></li>
+                <li><a href="/lists/tvshows#completed">Current</a></li>
+                <li><a href="/lists/tvshows#current">Completed</a></li>
+                <li><a href="/lists/tvshows#planned">Planned</a></li>
+                <li><a href="/lists/tvshows#onHold">On Hold</a></li>
+                <li><a href="/lists/tvshows#dropped">Dropped</a></li>
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Music</a>
+              <a href="/lists/music" class="dropdown-toggle" data-toggle="dropdown">Music</a>
               <ul class="dropdown-menu">
-                <li><a href="#current">Current</a></li>
-                <li><a href="#complete">Completed</a></li>
-                <li><a href="#planned">Planned</a></li>
+                <li><a href="/lists/music#completed">Current</a></li>
+                <li><a href="/lists/music#current">Completed</a></li>
+                <li><a href="/lists/music#planned">Planned</a></li>
+                <li><a href="/lists/music#onHold">On Hold</a></li>
+                <li><a href="/lists/music#dropped">Dropped</a></li>
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Video Games</a>
+              <a href="/lists/videogames" class="dropdown-toggle" data-toggle="dropdown">Video Games</a>
               <ul class="dropdown-menu">
-                <li><a href="#current">Current</a></li>
-                <li><a href="#complete">Completed</a></li>
-                <li><a href="#planned">Planned</a></li>
+                <li><a href="/lists/videogames#completed">Current</a></li>
+                <li><a href="/lists/videogames#current">Completed</a></li>
+                <li><a href="/lists/videogames#planned">Planned</a></li>
+                <li><a href="/lists/videogames#onHold">On Hold</a></li>
+                <li><a href="/lists/videogames#dropped">Dropped</a></li>
               </ul>
             </li>
             <form class="navbar-form navbar-left">
@@ -98,23 +114,22 @@
 
     <div class="container">
         <div class="page-header">
-            <h1>What You Have, What You Want <small>Books made easy</small></h1>
+            <h1>What You Have, What You Want <small><%= doc.category %> made easy</small></h1>
         </div>
     </div>
 
-    <section id="complete-book">
+    <section id="completed">
         <div class="container">
             <div class="panel panel-default">
               <!-- Default panel contents -->
               <div class="panel-heading">
-            <% var doc = docs[0]; %>
                 <%= doc.category %>
                 <small>Completed</small></div>
-
+                <% var i = 0 %>
                 <% doc.completed.forEach(function(item){ %>
                   <ul class="list-group">
                     <li class="list-group-item">
-                            <%= item %>
+                        <%= item %>
                         <div class="dropdown" style="float: right; bottom: 7px">
                           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <span class="caret"></span>
@@ -123,19 +138,22 @@
                             <li><a href="#">Move to Current</a></li>
                             <li><a href="#">Move to Planned</a></li>
                             <li><a href="#">Edit</a></li>
-                            <li><a href="#">Remove</a></li>
+                            <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/completed/delete" %> method="POST">
+                              <input type="hidden" name="index" value=<%= i %>>
+                              <li><button class="btn btn-primary" type="submit">Remove</button></li>
+                            </form>
                           </ul>
                         </div>
                     </li>
-                  </ul>                    
+                  </ul>
+                  <% i++ %>
                 <% }); %>
                 <li class="list-group-item">
-                    <form action="/lists/completed" method="POST">
+                    <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/completed" %> method="POST">
                         <div class="row">
                           <div class="col-lg-6">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="item" placeholder="Item">
-                                <input type="hidden" name="category" value=<%= doc.category %>>
                                 <span class="input-group-btn">
                                   <button class="btn btn-primary" type="submit">Add</button>
                                 </span>
@@ -148,19 +166,19 @@
         </div>
     </section>
 
-    <section id="planned-book">
+    <section id="planned">
         <div class="container">
             <div class="panel panel-default">
               <!-- Default panel contents -->
               <div class="panel-heading">
-            <% var doc = docs[0]; %>
                 <%= doc.category %>
                 <small>Planned</small></div>
+                <% var i = 0 %>
 
                 <% doc.planned.forEach(function(item){ %>
                   <ul class="list-group">
                     <li class="list-group-item">
-                            <%= item %>
+                        <%= item %>
                         <div class="dropdown" style="float: right; bottom: 7px">
                           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <span class="caret"></span>
@@ -169,19 +187,22 @@
                             <li><a href="#">Move to Current</a></li>
                             <li><a href="#">Move to Completed</a></li>
                             <li><a href="#">Edit</a></li>
-                            <li><a href="#">Remove</a></li>
+                            <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/planned/delete" %> method="POST">
+                              <input type="hidden" name="index" value=<%= i %>>
+                              <li><button class="btn btn-primary" type="submit">Remove</button></li>
+                            </form>
                           </ul>
                         </div>
                     </li>
                   </ul>
+                  <% i++ %>
                 <% }); %>
                 <li class="list-group-item">
-                    <form action="/lists/planned" method="POST">
+                    <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/planned" %> method="POST">
                         <div class="row">
                           <div class="col-lg-6">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="item" placeholder="Item">
-                                <input type="hidden" name="category" value=<%= doc.category %>>
                                 <span class="input-group-btn">
                                   <button class="btn btn-primary" type="submit">Add</button>
                                 </span>
@@ -194,19 +215,19 @@
         </div>
     </section>
 
-    <section id="current-book">
+    <section id="current">
         <div class="container">
             <div class="panel panel-default">
               <!-- Default panel contents -->
               <div class="panel-heading">
-            <% var doc = docs[0]; %>
                 <%= doc.category %>
                 <small>Current</small></div>
+                <% var i = 0 %>
 
                 <% doc.current.forEach(function(item){ %>
                   <ul class="list-group">
                     <li class="list-group-item">
-                            <%= item %>
+                        <%= item %>
                         <div class="dropdown" style="float: right; bottom: 7px">
                           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <span class="caret"></span>
@@ -215,19 +236,22 @@
                             <li><a href="#">Move to Planned</a></li>
                             <li><a href="#">Move to Completed</a></li>
                             <li><a href="#">Edit</a></li>
-                            <li><a href="#">Remove</a></li>
+                            <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/current/delete" %> method="POST">
+                              <input type="hidden" name="index" value=<%= i %>>
+                              <li><button class="btn btn-primary" type="submit">Remove</button></li>
+                            </form>
                           </ul>
                         </div>
                     </li>
                   </ul>
+                  <% i++ %>
                 <% }); %>
                 <li class="list-group-item">
-                    <form action="/lists/current" method="POST">
+                    <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/current" %> method="POST">
                         <div class="row">
                           <div class="col-lg-6">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="item" placeholder="Item">
-                                <input type="hidden" name="category" value=<%= doc.category %>>
                                 <span class="input-group-btn">
                                   <button class="btn btn-primary" type="submit">Add</button>
                                 </span>
@@ -239,5 +263,104 @@
             </div>
         </div>
     </section>
+
+    <section id="dropped">
+        <div class="container">
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">
+                <%= doc.category %>
+                <small>Dropped</small></div>
+                <% var i = 0 %>
+
+                <% doc.dropped.forEach(function(item){ %>
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                        <%= item %>
+                        <div class="dropdown" style="float: right; bottom: 7px">
+                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Move to Planned</a></li>
+                            <li><a href="#">Move to Completed</a></li>
+                            <li><a href="#">Edit</a></li>
+                            <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/dropped/delete" %> method="POST">
+                              <input type="hidden" name="index" value=<%= i %>>
+                              <li><button class="btn btn-primary" type="submit">Remove</button></li>
+                            </form>
+                          </ul>
+                        </div>
+                    </li>
+                  </ul>
+                  <% i++ %>
+                <% }); %>
+                <li class="list-group-item">
+                    <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/dropped" %> method="POST">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="item" placeholder="Item">
+                                <span class="input-group-btn">
+                                  <button class="btn btn-primary" type="submit">Add</button>
+                                </span>
+                            </div><!-- /input-group -->
+                          </div><!-- /.col-lg-6 -->
+                        </div><!-- /.row -->
+                    </form>
+                </li>
+            </div>
+        </div>
+    </section>
+
+    <section id="onHold">
+        <div class="container">
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">
+                <%= doc.category %>
+                <small>On Hold</small></div>
+                <% var i = 0 %>
+
+                <% doc.onHold.forEach(function(item){ %>
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                        <%= item %>
+                        <div class="dropdown" style="float: right; bottom: 7px">
+                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Move to Planned</a></li>
+                            <li><a href="#">Move to Completed</a></li>
+                            <li><a href="#">Edit</a></li>
+                            <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/onHold/delete" %> method="POST">
+                              <input type="hidden" name="index" value=<%= i %>>
+                              <li><button class="btn btn-primary" type="submit">Remove</button></li>
+                            </form>
+                          </ul>
+                        </div>
+                    </li>
+                  </ul>
+                  <% i++ %>
+                <% }); %>
+                <li class="list-group-item">
+                    <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/onHold" %> method="POST">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="item" placeholder="Item">
+                                <span class="input-group-btn">
+                                  <button class="btn btn-primary" type="submit">Add</button>
+                                </span>
+                            </div><!-- /input-group -->
+                          </div><!-- /.col-lg-6 -->
+                        </div><!-- /.row -->
+                    </form>
+                </li>
+            </div>
+        </div>
+    </section>
+
   </body>
 </html>

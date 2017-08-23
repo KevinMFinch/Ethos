@@ -8,7 +8,7 @@ var listModel = require('../public/js/list.js');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-var mongoUrl = "mongodb://localhost:27017/Ethos";
+var mongoUrl = require('../public/js/mongourl.js').mongourl;
 
 
 /* GET users listing. */
@@ -23,7 +23,8 @@ MongoClient.connect(mongoUrl, function(err, db) {
 
   // Receive the post request for a signup
   router.post('/', function(req, res, next) {
-    db.collection("users").find({"username" : req.body.username.toLowerCase()}).toArray(function(err, docs) {
+    var username = req.body.username.toLowerCase();
+    db.collection("users").find({"username" : username}).toArray(function(err, docs) {
       if (docs.length > 0) {
          res.render('signup', {"error" : "username already exists"});
       } else {
@@ -31,29 +32,32 @@ MongoClient.connect(mongoUrl, function(err, db) {
         var insertDocs = [];
         var listCategories = ["Books", "Movies", "TV Shows", "Music", "Video Games"];
         for (var i = 0; i < listCategories.length; i++) {
-          insertDocs.push(listModel.list(req.body.username.toLowerCase(), listCategories[i]));
+          insertDocs.push(listModel.list(username, listCategories[i]));
         }
 
         db.collection("lists").insertMany(insertDocs, function(err, response) {
           listIDs = response.insertedIds;
-          console.log(listIDs);
           var plainPass = req.body.password;
-          bcrypt.hash(plainPass, saltRounds, function(err, hash) {
-            // Store hash in your password DB. 
+          var validatePass = req.body.validatePassword;
+          if (plainPass == validatePass) {
+            bcrypt.hash(plainPass, saltRounds, function(err, hash) {
+            // Store hash in your password DB.
             db.collection("users").insertOne({
-                "username" : req.body.username.toLowerCase(),
+                "username" : username,
                 "email" : req.body.email,
                 "password" : hash,
                 "listIDs" : listIDs
               }, function(err, r) {
-                res.cookie("username", req.body.username.toLowerCase()).redirect("/lists/owner/" + req.body.username.toLowerCase());
+                res.cookie("username", username).redirect("/lists/books");
+              });
             });
-          });
+          } else {
+            res.render('signup', {"error" : "Passwords don't match"});
+          }
         });
       }
     });
-    
   });
 })
 
-module.exports = router; 
+module.exports = router;
