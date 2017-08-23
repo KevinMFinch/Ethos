@@ -113,7 +113,7 @@
               <div class="panel-heading">
                 <%= doc.category %>
                 <small>Completed</small></div>
-
+                <% var i = 0 %>
                 <% doc.completed.forEach(function(item){ %>
                   <ul class="list-group">
                     <li class="list-group-item">
@@ -127,13 +127,14 @@
                             <li><a href="#">Move to Planned</a></li>
                             <li><a href="#">Edit</a></li>
                             <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/completed/delete" %> method="POST">
-                              <input type="hidden" name="item" value=<%= item %>>
+                              <input type="hidden" name="index" value=<%= i %>>
                               <li><button class="btn btn-primary" type="submit">Remove</button></li>
                             </form>
                           </ul>
                         </div>
                     </li>
                   </ul>
+                  <% i++ %>
                 <% }); %>
                 <li class="list-group-item">
                     <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/completed" %> method="POST">
@@ -160,6 +161,7 @@
               <div class="panel-heading">
                 <%= doc.category %>
                 <small>Planned</small></div>
+                <% var i = 0 %>
 
                 <% doc.planned.forEach(function(item){ %>
                   <ul class="list-group">
@@ -174,13 +176,14 @@
                             <li><a href="#">Move to Completed</a></li>
                             <li><a href="#">Edit</a></li>
                             <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/planned/delete" %> method="POST">
-                              <input type="hidden" name="item" value=<%= item %>>
+                              <input type="hidden" name="index" value=<%= i %>>
                               <li><button class="btn btn-primary" type="submit">Remove</button></li>
                             </form>
                           </ul>
                         </div>
                     </li>
                   </ul>
+                  <% i++ %>
                 <% }); %>
                 <li class="list-group-item">
                     <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/planned" %> method="POST">
@@ -207,6 +210,7 @@
               <div class="panel-heading">
                 <%= doc.category %>
                 <small>Current</small></div>
+                <% var i = 0 %>
 
                 <% doc.current.forEach(function(item){ %>
                   <ul class="list-group">
@@ -221,13 +225,14 @@
                             <li><a href="#">Move to Completed</a></li>
                             <li><a href="#">Edit</a></li>
                             <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/current/delete" %> method="POST">
-                              <input type="hidden" name="item" value=<%= item %>>
+                              <input type="hidden" name="index" value=<%= i %>>
                               <li><button class="btn btn-primary" type="submit">Remove</button></li>
                             </form>
                           </ul>
                         </div>
                     </li>
                   </ul>
+                  <% i++ %>
                 <% }); %>
                 <li class="list-group-item">
                     <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/current" %> method="POST">
@@ -254,6 +259,7 @@
               <div class="panel-heading">
                 <%= doc.category %>
                 <small>Dropped</small></div>
+                <% var i = 0 %>
 
                 <% doc.dropped.forEach(function(item){ %>
                   <ul class="list-group">
@@ -268,13 +274,14 @@
                             <li><a href="#">Move to Completed</a></li>
                             <li><a href="#">Edit</a></li>
                             <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/dropped/delete" %> method="POST">
-                              <input type="hidden" name="item" value=<%= item %>>
+                              <input type="hidden" name="index" value=<%= i %>>
                               <li><button class="btn btn-primary" type="submit">Remove</button></li>
                             </form>
                           </ul>
                         </div>
                     </li>
                   </ul>
+                  <% i++ %>
                 <% }); %>
                 <li class="list-group-item">
                     <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/dropped" %> method="POST">
@@ -301,6 +308,7 @@
               <div class="panel-heading">
                 <%= doc.category %>
                 <small>On Hold</small></div>
+                <% var i = 0 %>
 
                 <% doc.onHold.forEach(function(item){ %>
                   <ul class="list-group">
@@ -315,13 +323,14 @@
                             <li><a href="#">Move to Completed</a></li>
                             <li><a href="#">Edit</a></li>
                             <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/onHold/delete" %> method="POST">
-                              <input type="hidden" name="item" value=<%= item %>>
+                              <input type="hidden" name="index" value=<%= i %>>
                               <li><button class="btn btn-primary" type="submit">Remove</button></li>
                             </form>
                           </ul>
                         </div>
                     </li>
                   </ul>
+                  <% i++ %>
                 <% }); %>
                 <li class="list-group-item">
                     <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/onHold" %> method="POST">

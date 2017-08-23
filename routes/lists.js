@@ -46,7 +46,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
   }); */
 
   router.post('/:category/:type/delete', function(req, res) {
-    var item = req.body.item;
+    var index = req.body.index;
     var username = req.cookies.username;
     var category = req.params.category;
     var type = req.params.type;
@@ -69,10 +69,8 @@ MongoClient.connect(mongoUrl, function(err, db) {
       else if (type == "current")
         array = doc.current;
 
-      var index = array.indexOf(item);
-      if (index > -1) {
-        array.splice(index, 1);
-      }
+
+      array.splice(index, 1);
       collection.update({"owner": username, "category": category},{ $set: {[type] : array}}, function(err, doc) {
         res.redirect('/lists/' + category +  "#" + type);
       })
