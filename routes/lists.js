@@ -19,6 +19,9 @@ MongoClient.connect(mongoUrl, function(err, db) {
 
   router.get('/:category', function(req, res, next) {
     var username = req.cookies.username;
+    if (!username) {
+      res.redirect('/login');
+    }
     var category = req.params.category;
     category = category.charAt(0).toUpperCase() + category.slice(1);
     if (category.toLowerCase().includes("tv")) {

@@ -48,7 +48,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
                 "password" : hash,
                 "listIDs" : listIDs
               }, function(err, r) {
-                res.cookie("username", username).redirect("/lists/owner/" + username);
+                res.cookie("username", username).redirect("/lists/books");
               });
             });
           } else {
