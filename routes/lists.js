@@ -17,6 +17,21 @@ MongoClient.connect(mongoUrl, function(err, db) {
     })
   });
 
+  router.get('/:category', function(req, res, next) {
+    var username = req.cookies.username;
+    var category = req.params.category;
+    category = category.charAt(0).toUpperCase() + category.slice(1);
+    if (category.includes("Tv")) {
+      category = "TV Shows";
+    }
+    if (category.includes("Video")) {
+      category = "Video Games";
+    }
+    collection.find({"owner": username, "category": category}).toArray(function(err, docs) {
+      res.render('listview', {docs: docs});
+    })
+  })
+
   // Returns all the lists belonging to the particular user
   router.get('/owner/:userName', function(req, res, next) {
     var userName = req.params.userName;
