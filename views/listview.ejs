@@ -126,7 +126,10 @@
                             <li><a href="#">Move to Current</a></li>
                             <li><a href="#">Move to Planned</a></li>
                             <li><a href="#">Edit</a></li>
-                            <li><a href="#">Remove</a></li>
+                            <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/completed/delete" %> method="POST">
+                              <input type="hidden" name="item" value=<%= item %>>
+                              <li><button class="btn btn-primary" type="submit">Remove</button></li>
+                            </form>
                           </ul>
                         </div>
                     </li>
@@ -170,7 +173,10 @@
                             <li><a href="#">Move to Current</a></li>
                             <li><a href="#">Move to Completed</a></li>
                             <li><a href="#">Edit</a></li>
-                            <li><a href="#">Remove</a></li>
+                            <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/planned/delete" %> method="POST">
+                              <input type="hidden" name="item" value=<%= item %>>
+                              <li><button class="btn btn-primary" type="submit">Remove</button></li>
+                            </form>
                           </ul>
                         </div>
                     </li>
@@ -214,7 +220,10 @@
                             <li><a href="#">Move to Planned</a></li>
                             <li><a href="#">Move to Completed</a></li>
                             <li><a href="#">Edit</a></li>
-                            <li><a href="#">Remove</a></li>
+                            <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/current/delete" %> method="POST">
+                              <input type="hidden" name="item" value=<%= item %>>
+                              <li><button class="btn btn-primary" type="submit">Remove</button></li>
+                            </form>
                           </ul>
                         </div>
                     </li>
@@ -258,7 +267,10 @@
                             <li><a href="#">Move to Planned</a></li>
                             <li><a href="#">Move to Completed</a></li>
                             <li><a href="#">Edit</a></li>
-                            <li><a href="#">Remove</a></li>
+                            <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/dropped/delete" %> method="POST">
+                              <input type="hidden" name="item" value=<%= item %>>
+                              <li><button class="btn btn-primary" type="submit">Remove</button></li>
+                            </form>
                           </ul>
                         </div>
                     </li>
@@ -302,7 +314,10 @@
                             <li><a href="#">Move to Planned</a></li>
                             <li><a href="#">Move to Completed</a></li>
                             <li><a href="#">Edit</a></li>
-                            <li><a href="#">Remove</a></li>
+                            <form action=<%= "/lists/" + doc.category.split(" ").join("") + "/onHold/delete" %> method="POST">
+                              <input type="hidden" name="item" value=<%= item %>>
+                              <li><button class="btn btn-primary" type="submit">Remove</button></li>
+                            </form>
                           </ul>
                         </div>
                     </li>

@@ -45,6 +45,40 @@ MongoClient.connect(mongoUrl, function(err, db) {
     })
   }); */
 
+  router.post('/:category/:type/delete', function(req, res) {
+    var item = req.body.item;
+    var username = req.cookies.username;
+    var category = req.params.category;
+    var type = req.params.type;
+    if (category.includes("TV")) {
+      category = "TV Shows";
+    }
+    if (category.includes("Video")) {
+      category = "Video Games";
+    }
+    collection.findOne({"owner" : username, "category" : category}, function(err, doc) {
+      var array;
+      if (type == "planned")
+        array = doc.planned;
+      else if (type == "completed")
+        array = doc.completed;
+      else if (type == "onHold")
+        array = doc.onHold;
+      else if (type == "dropped")
+        array = doc.dropped;
+      else if (type == "current")
+        array = doc.current;
+
+      var index = array.indexOf(item);
+      if (index > -1) {
+        array.splice(index, 1);
+      }
+      collection.update({"owner": username, "category": category},{ $set: {[type] : array}}, function(err, doc) {
+        res.redirect('/lists/' + category +  "#" + type);
+      })
+    })
+  });
+
   // Submit list post
   router.post('/:category/:type', function(req, res){
     var item = req.body.item;
@@ -76,6 +110,8 @@ MongoClient.connect(mongoUrl, function(err, db) {
     })
   });
 
-})
+});
+
+
 
 module.exports = router;
