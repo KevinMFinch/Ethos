@@ -33,8 +33,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
     collection.findOne({"owner": username, "category": category}, function(err, doc) {
       res.render('listview', {doc: doc});
     });
-
-  })
+  });
 
   // Returns all the lists belonging to the particular user
   /*
@@ -106,6 +105,54 @@ MongoClient.connect(mongoUrl, function(err, db) {
         res.redirect('/lists/' + category +  "#" + type);
       })
     })
+  });
+
+  router.post('/update/move/:category/:fromStatus/:toStatus', function(req, res) {
+    var fromStatus = req.params.fromStatus;
+    var toStatus = req.params.toStatus;
+    var index = req.body.index;
+    var item = req.body.item;
+    var username = req.cookies.username;
+    var category = req.params.category;
+    if (category.toLowerCase().includes("tv")) {
+      category = "TV Shows";
+    }
+    if (category.toLowerCase().includes("video")) {
+      category = "Video Games";
+    }
+    collection.findOne({"owner" : username, "category" : category}, function(err, doc) {
+      var fromArray;
+      var toArray;
+      if (fromStatus == "planned")
+        fromArray = doc.planned;
+      else if (fromStatus == "completed")
+        fromArray = doc.completed;
+      else if (fromStatus == "onHold")
+        fromArray = doc.onHold;
+      else if (fromStatus == "dropped")
+        fromArray = doc.dropped;
+      else if (fromStatus == "current")
+        fromArray = doc.current;
+
+      if (toStatus == "planned")
+        toArray = doc.planned;
+      else if (toStatus == "completed")
+        toArray = doc.completed;
+      else if (toStatus == "onHold")
+        toArray = doc.onHold;
+      else if (toStatus == "dropped")
+        toArray = doc.dropped;
+      else if (toStatus == "current")
+        toArray = doc.current;
+
+      fromArray.splice(index, 1);
+      toArray.push(item);
+      collection.update({"owner": username, "category": category},{ $set: {[fromStatus] : fromArray}}, function(updateErr, updatedDoc) {
+        collection.update({"owner": username, "category": category},{ $set: {[toStatus] : toArray}}, function(finalErr, finalDoc) {
+          res.redirect('/lists/' + category + '#' + toStatus);
+        });
+      });
+    });
   });
 
 });
