@@ -110,6 +110,4 @@ MongoClient.connect(mongoUrl, function(err, db) {
 
 });
 
-
-
 module.exports = router;
