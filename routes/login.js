@@ -13,7 +13,12 @@ MongoClient.connect(mongoUrl, function(err, db) {
 
   // Return all lists
   router.get('/', function(req, res, next) {
-    res.render('login', {"error" :""});
+    if (req.cookies.username) {
+      res.redirect('lists/books');
+    } else {
+      res.render('login', {"error" :""});
+    }
+
   });
 
   // Submit list post
