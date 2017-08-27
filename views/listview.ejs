@@ -137,8 +137,8 @@
                                 <% if (statuses[z] != statuses[j]) { %>
                                   <form action=<%= "/lists/update/move/" + doc.category.split(" ").join("") + "/" + statuses[j] + "/" + statuses[z] %> method="POST">
                                     <input type="hidden" name="index" value=<%= i %>>
-                                    <input type="hidden" name="item" value=<%= item %>>
-                                    <li><button class="btn btn-primary" type="submit">Move to  <%= statuses[z] %></button></li>
+                                    <input type="hidden" name="item" value=<%= item.split(" ").join("+") %>>
+                                    <li><button class="btn btn-primary" type="submit">Move to  <%= fieldText[z] %></button></li>
                                   </form>
                                 <% } %>
                               <% } %>
