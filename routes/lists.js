@@ -114,6 +114,9 @@ MongoClient.connect(mongoUrl, function(err, db) {
     var item = req.body.item;
     var username = req.cookies.username;
     var category = req.params.category;
+    if (item.includes("+")) {
+      item = item.split("+").join(" ");
+    }
     if (category.toLowerCase().includes("tv")) {
       category = "TV Shows";
     }
