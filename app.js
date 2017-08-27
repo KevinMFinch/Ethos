@@ -12,7 +12,6 @@ var signup = require('./routes/signup');
 var login = require('./routes/login');
 var logout = require('./routes/logout');
 
-
 var app = express();
 
 // view engine setup
